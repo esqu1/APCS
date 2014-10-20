@@ -1,9 +1,0 @@
-public class rect{
-    private int height, width;
-    
-    public rect(int h, int w){
-	height = h;
-	width = w;
-	
-    }
-}
