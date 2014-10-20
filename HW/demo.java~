@@ -1,0 +1,8 @@
+public class demo{
+    public static void main(String[] args){
+	coordinate p1, p2;
+
+	p1 = new coordinate();
+	p2 = new coordinate();
+    }
+}

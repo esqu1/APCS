@@ -1,0 +1,17 @@
+public class PersonalGreeterDemo{
+    public static void main(String[] args){
+	PersonalGreeter Bob, Mary, Steve;
+
+	Bob = new PersonalGreeter();
+	Mary = new PersonalGreeter("Mary");
+	Steve = new PersonalGreeter("Steve", "What's good, my buddy");
+
+	System.out.println(Bob.getName());
+	System.out.println(Bob.getGreeting());
+	System.out.println(Mary.getName());
+	System.out.println(Mary.getGreeting());
+	System.out.println(Steve.getName());
+	System.out.println(Steve.getGreeting());
+    }
+
+}
