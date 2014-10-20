@@ -5,7 +5,7 @@ public class Warrior extends Adventurer{
     public Warrior(){
 	super("Dennis");
 	setHP(60);
-	setRage(20);
+	setRage(50);
 	setSTR(14);
 	setDEX(6);
 	setINT(10);
@@ -14,7 +14,7 @@ public class Warrior extends Adventurer{
     public Warrior(String n){
 	super(n);
 	setHP(60);
-	setRage(20);
+	setRage(50);
 	setSTR(14);
 	setDEX(6);
 	setINT(10);
@@ -60,7 +60,7 @@ public class Warrior extends Adventurer{
 		setRage(getRage() - 5);
 	    }else{
 		System.out.println(this + " misses " + other + "!");
-		setRage(getRage() - 5);
+		this.setRage(getRage() - 5);
 	    }
 	}
     }

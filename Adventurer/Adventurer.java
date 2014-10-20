@@ -72,7 +72,7 @@ public class Adventurer{
     }
 
     public int protect(int n, Adventurer other){
-	return n / (other.getINT() / 5);
+	return n / ((other.getINT() / 8) + 1);
     }
     
     public boolean hit(Adventurer other){

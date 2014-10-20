@@ -4,7 +4,7 @@ public class Wizard extends Adventurer{
 
     public Wizard(){
 	super("Matthew");
-	setHP(20);
+	setHP(50);
 	setMana(50);
 	setSTR(6);
 	setDEX(8);
@@ -14,7 +14,7 @@ public class Wizard extends Adventurer{
     public Wizard(String n){
 	super(n);
 	setHP(50);
-	setMana(25);
+	setMana(50);
 	setSTR(6);
 	setDEX(8);
 	setINT(18);

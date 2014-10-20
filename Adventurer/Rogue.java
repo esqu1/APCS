@@ -5,7 +5,7 @@ public class Rogue extends Adventurer{
     public Rogue(){
 	super("Max");
 	setHP(50);
-	setStamina(25);
+	setStamina(50);
 	setSTR(8);
 	setDEX(14);
 	setINT(10);
@@ -14,7 +14,7 @@ public class Rogue extends Adventurer{
     public Rogue(String n){
 	super(n);
 	setHP(50);
-	setStamina(25);
+	setStamina(50);
 	setSTR(8);
 	setDEX(14);
 	setINT(10);
