@@ -1,5 +1,5 @@
 import java.util.Random;
-public class Adventurer{
+public abstract class Adventurer{
     private String name;
     private int HP, STR, DEX, INT;
 
@@ -43,6 +43,7 @@ public class Adventurer{
 	return name + "\n" + getHP() + "HP " + getSTR() + "STR " + getDEX() + "DEX " + getINT() + "INT ";
     }
     
+    
     public String getName(){
 	return name;
     }
@@ -82,7 +83,8 @@ public class Adventurer{
 	return n < m;
     }
 
-    public void attack(Adventurer other){
+    public abstract void attack(Adventurer other);
+	/*
 	Random r = new Random();
 	int n = protect(r.nextInt(getSTR()),other);
 	if(hit(other) || hit(other)){
@@ -91,9 +93,11 @@ public class Adventurer{
 	}else{
 	    System.out.println(this + " misses " + other + "!");
 	}
-    }
+	*/
+    
 
-    public void specialAttack(Adventurer other){
+    public abstract void specialAttack(Adventurer other);
+	/*
 	Random r = new Random();
 	int n = protect(r.nextInt(getSTR() + 4),other);
 	if(hit(other)){
@@ -102,7 +106,8 @@ public class Adventurer{
 	}else{
 	    System.out.println(this + " misses " + other + "!");
 	}
-    }
+	*/
+    
 
     
 }

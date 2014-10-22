@@ -1,7 +1,7 @@
 public class Driver{
     public static void main(String[]args){
-	Adventurer p1 =new Adventurer("Chadwick");
-	Warrior p2 =new Warrior("Grobnar");
+	MartialArtist p1 = new MartialArtist("Young Sensei");
+	Warrior p2 = new Warrior("Grobnar");
 	p2.setRage(20);
 	Wizard p3 = new Wizard("Merlin");
 	Rogue p4 = new Rogue("Inigo Montoya");

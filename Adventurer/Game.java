@@ -18,8 +18,8 @@ public class Game{
     
     public static void main(String[] args){
 	// initialize the players
-	Adventurer player = new Adventurer();
-	Adventurer opponent = new Adventurer();
+	Adventurer player;// = new Adventurer();
+	Adventurer opponent;// = new Adventurer();
 	
 	Random r = new Random();
 	Scanner s = new Scanner(System.in);
@@ -43,24 +43,22 @@ public class Game{
 	    }else{
 		System.out.println("You chose Wizard!");
 	    }
-	}else if(choice.equals("C")){
+	}else{
 	    player = new Rogue(name);
 	    System.out.println("You chose Rogue!");
 	}
 
 	// create the opponent class randomly
-	int oppChoice = r.nextInt(4) + 1;
+	int oppChoice = r.nextInt(3) + 1;
 	if(oppChoice == 1){
 	    opponent = new Warrior();
 	    System.out.println("Your opponent is a Warrior!");
 	}else if(oppChoice == 2){
 	    opponent = new Wizard();
 	    System.out.println("Your opponent is a Wizard!");
-	}else if(oppChoice == 3){
+	}else{
 	    opponent = new Rogue();
 	    System.out.println("Your opponent is a Rogue!");
-	}else{
-	    System.out.println("Your opponent is an Adventurer!");
 	}
 
 	System.out.println("\nYou will now need to distribute 30 points among your strength, dexterity, and integrity.");
