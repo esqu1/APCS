@@ -38,7 +38,7 @@ public class Wizard extends Adventurer{
     
     public void attack(Adventurer other){
 	Random r = new Random();
-	int n = protect(r.nextInt(getSTR() / 2),other);
+	int n = r.nextInt(getSTR() / 2);
 	if(hit(other) || hit(other)){
 	    System.out.println(this + " pokes " + other + " with a wooden stick for " + n + " points of damage!!");
 	    other.setHP(other.getHP() - n);
@@ -49,12 +49,12 @@ public class Wizard extends Adventurer{
 
     public void specialAttack(Adventurer other){
 	Random r = new Random();
-	int n = protect(r.nextInt(getSTR() * 2),other);
+	int n = r.nextInt(getSTR() * 2);
 	if(mana < 5){
 	    System.out.println("Not enough mana. Using regular attack.");
 	    attack(other);
 	}else{
-	    if(hit(other)){
+	    if(hitMagic(other)){
 		System.out.println(this + " shoots fireballs at " + other + " for " + n + " points of damage!!");
 		other.setHP(other.getHP() - n);
 		this.setMana(getMana() - 5);

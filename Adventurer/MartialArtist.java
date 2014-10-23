@@ -27,7 +27,7 @@ public class MartialArtist extends Adventurer{
 
     public void attack(Adventurer other){
 	Random r = new Random();
-	int n = protect(r.nextInt(getSTR()+3),other);
+	int n = r.nextInt(getSTR()+3);
 	if(hit(other) || hit(other)){
 	    System.out.println(this + " attacks " + other +  " with his katanas for " + n + " points of damage!!");
 	    other.setHP(other.getHP() - n);
@@ -38,8 +38,8 @@ public class MartialArtist extends Adventurer{
     
     public void specialAttack(Adventurer other){
 	Random r = new Random();
-	int n = protect(r.nextInt(getSTR() * 2),other);
-	if(hit(other)){
+	int n = r.nextInt(getSTR() * 2);
+	if(hitMagic(other)){
 	    System.out.println(this + " attacks " + other  + " with a fierce uppercut for " + n + " points of damage!!");
 	    other.setHP(other.getHP() - n);
 	    setQi(getQi() - 5);	    

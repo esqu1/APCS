@@ -1,8 +1,8 @@
 import java.util.Random;
 import java.util.Scanner;
-import java.util.InputMismatchException;
 public class Game{
-
+    private static int n;
+    
     public static boolean isInt(String str){
 	if(str.equals("")){
 	    return false;
@@ -15,21 +15,17 @@ public class Game{
 	}
 	return true;
     }
-    
-    public static void main(String[] args){
-	// initialize the players
-	Adventurer player;// = new Adventurer();
-	Adventurer opponent;// = new Adventurer();
-	
+
+    public static Adventurer setupPlayer(){
+	Adventurer player;
 	Random r = new Random();
 	Scanner s = new Scanner(System.in);
 
-	// ask for name and class
 	System.out.println("Welcome! What will be your adventurer's name?");
 	String name = s.nextLine();
-	System.out.println("Welcome, " + name + "! Choose a class:\nA : Warrior\nB : Wizard\nC : Rogue\n");
+	System.out.println("Welcome, " + name + "! Choose a class:\nA : Warrior\nB : Wizard\nC : Rogue\nD : Martial Artist");
 	String choice = s.nextLine();
-	while(! choice.equals("A") && ! choice.equals("B") && ! choice.equals("C")){ // if they enter something invalid
+	while(! choice.equalsIgnoreCase("A") && ! choice.equalsIgnoreCase("B") && ! choice.equalsIgnoreCase("C") && !choice.equalsIgnoreCase("D")){ // if they enter something invalid
 	    System.out.println("Invalid response received. Please try again.");
 	    choice = s.nextLine();
 	}
@@ -43,16 +39,25 @@ public class Game{
 	    }else{
 		System.out.println("You chose Wizard!");
 	    }
-	}else{
+	}else if(choice.equals("C")){
 	    player = new Rogue(name);
 	    System.out.println("You chose Rogue!");
+	}else{
+	    player = new MartialArtist(name);
+	    System.out.println("You chose Martial Artist!");
 	}
 
-	// create the opponent class randomly
+	return player;
+    }
+
+    
+    public static Adventurer setupOpp(){
+	Random r = new Random();
+	Adventurer opponent;
 	int oppChoice = r.nextInt(3) + 1;
 	if(oppChoice == 1){
-	    opponent = new Warrior();
-	    System.out.println("Your opponent is a Warrior!");
+		opponent = new Warrior();
+		System.out.println("Your opponent is a Warrior!");
 	}else if(oppChoice == 2){
 	    opponent = new Wizard();
 	    System.out.println("Your opponent is a Wizard!");
@@ -60,10 +65,14 @@ public class Game{
 	    opponent = new Rogue();
 	    System.out.println("Your opponent is a Rogue!");
 	}
+	return opponent;
+    }
 
+    public static void setupStats(Adventurer player, Adventurer opponent){
+	Scanner s = new Scanner(System.in);
 	System.out.println("\nYou will now need to distribute 30 points among your strength, dexterity, and integrity.");
 	System.out.println("Enter how many strength points you want. (max 30) Your strength affects the power of your attacks.");
-
+	
 	boolean t = true;
 	String str = s.nextLine();
 	while(t){
@@ -81,37 +90,8 @@ public class Game{
 	    }
 	}
 	        
-	/*
-	while(t){
-	    try{
-		int i  = s.nextInt();
-		if(i <= 30){
-		    player.setDEX(i);
-		    t = false;
-		}else{
-		    System.out.println("That number is invalid.");
-		}
-	    }
-	    catch(InputMismatchException e){
-		System.out.println("Invalid response received. Please try again.");
-	    }
-	}
 	
-	while(true){
-	    if(s.hasNextInt()){
-		int stat = s.nextInt();
-		if(stat <= 30){
-		    player.setDEX(stat);
-		    break;
-		}else{
-		    System.out.println("That number is invalid.");
-		}
-	    }else{
-		System.out.println("Invalid response received. Please try again.");
-	    }
-	    String nyeh = s.nextLine();
-	    }*/
-	System.out.println("Now set your dexterity. (max " + (30 - player.getSTR()) + ") Dexterity affects your accuracy relative to others'. \nThe remaining points will to integrity, which affects your defense.");
+	System.out.println("Now set your dexterity. (max " + (30 - player.getSTR()) + ") Dexterity affects your accuracy relative to others'. \nThe remaining points will to integrity, which affects your special attack accuracy.");
 	t = true;
 	str = s.nextLine();
 	while(t){
@@ -129,16 +109,12 @@ public class Game{
 		str = s.nextLine();
 	    }
 	}
-	System.out.println("Now you shall face against the fierce opponent, " + opponent.getName() + ".");
-	System.out.println("We need to decide who goes first. Allow me to randomly pick with a coin...\n.\n.\n.");
-	
-	int n = r.nextInt(2) + 1;
-	int decision = 0;
-	if(n == 1){
-	    System.out.println("You go first!");
-	}else{
-	    System.out.println("Opponent goes first!");
-	}
+    }
+
+
+    public static void combat(Adventurer player, Adventurer opponent){
+	Random r = new Random();
+	Scanner s = new Scanner(System.in);
 	boolean endmatch = true;
 	String loser = "nobody";
         System.out.println("\n********** GAME BEGINS **********\n");
@@ -177,7 +153,7 @@ public class Game{
 	    if(chance < 0.6){
 		opponent.attack(player);
 	    }else{
-		if(oppChoice != 4 && opponent.getSC() > 5){
+		if(opponent.getSC() > 5){
 		    opponent.specialAttack(player);
 		}else{
 		    opponent.attack(player);
@@ -214,10 +190,39 @@ public class Game{
 	    }
       	}
 	if(loser.equals("player")){
-	    System.out.println(name + " has lost!\n" + "Malevolence has won!!");
+	    System.out.println(player.getName() + " has lost!\n" + "Malevolence has won!!");
 	}else if(loser.equals("opponent")){
-	    System.out.println("Malevolence has lost!\n" + name + " has won!!");
+	    System.out.println("Malevolence has lost!\n" + player.getName() + " has won!!");
 	}
+    }
+	
+    
+    public static void main(String[] args){
+	
+	// initialize the players
+	//Adventurer player = new Warrior();// = new Adventurer();
+	//Adventurer opponent = new Warrior();// = new Adventurer();
+	
+	Adventurer player = setupPlayer();
+	Adventurer opponent = setupOpp();
+	Random r = new Random();
+	Scanner s = new Scanner(System.in);
+	
+	setupStats(player,opponent);
+	System.out.println("Now you shall face against the fierce opponent, " + opponent.getName() + ".");
+	System.out.println("We need to decide who goes first. Allow me to randomly pick with a coin...\n.\n.\n.");
+	
+	n = r.nextInt(2) + 1;
+	int decision = 0;
+	if(n == 1){
+	    System.out.println("You go first!");
+	}else{
+	    System.out.println("Opponent goes first!");
+	}
+
+	combat(player,opponent);
+	
+
     }
 	
 }

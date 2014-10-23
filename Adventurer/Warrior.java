@@ -38,7 +38,7 @@ public class Warrior extends Adventurer{
     
     public void attack(Adventurer other){
 	Random r = new Random();
-	int n = protect(r.nextInt(getSTR()),other);
+	int n = r.nextInt(getSTR());
 	if(hit(other) || hit(other)){
 	    System.out.println(this + " attacks " + other + " with a sword for " + n + " points of damage!!");
 	    other.setHP(other.getHP() - n);
@@ -49,12 +49,12 @@ public class Warrior extends Adventurer{
 
     public void specialAttack(Adventurer other){
 	Random r = new Random();
-	int n = protect(r.nextInt(getSTR() + 7),other);
+	int n = r.nextInt(getSTR() + 7);
 	if(rage < 5){
 	    System.out.println("Not enough rage. Using regular attack");
 	    attack(other);
 	}else{
-	    if(hit(other)){
+	    if(hitMagic(other)){
 		System.out.println(this + " fiercely attacks " + other + " with a sword for " + n + " points of damage!!");
 		other.setHP(other.getHP() - n);
 		setRage(getRage() - 5);

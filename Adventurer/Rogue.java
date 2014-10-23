@@ -38,7 +38,7 @@ public class Rogue extends Adventurer{
     
     public void attack(Adventurer other){
 	Random r = new Random();
-	int n = protect(r.nextInt(getSTR() + 2), other);
+	int n = r.nextInt(getSTR() + 2);
 	if(hit(other) || hit(other)){
 	    System.out.println(this + " attacks " + other + " sneakily for " + n + " points of damage!!");
 	    other.setHP(other.getHP() - n);
@@ -49,12 +49,12 @@ public class Rogue extends Adventurer{
 
     public void specialAttack(Adventurer other){
     	Random r = new Random();
-    	int n = protect(r.nextInt(getSTR() + 8), other);
+    	int n = r.nextInt(getSTR() + 8);
     	if(stamina < 5){
 	    System.out.println("Not enough mana, using regular attack.");
 	    attack(other);
     	}else{
-	    if(hit(other)){
+	    if(hitMagic(other)){
 		System.out.println(this + " swindles " + other + " for " + n + " points of damage!!");
 		other.setHP(other.getHP() - n);
 		this.setStamina(getStamina() - 5);

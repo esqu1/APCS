@@ -83,6 +83,13 @@ public abstract class Adventurer{
 	return n < m;
     }
 
+    public boolean hitMagic(Adventurer other){
+	int m = (int)((this.getINT() - other.getINT()) * 1.25) + 50;
+	Random rand = new Random();
+	int n = rand.nextInt(100);
+	return n < m;
+    }
+    
     public abstract void attack(Adventurer other);
 	/*
 	Random r = new Random();
