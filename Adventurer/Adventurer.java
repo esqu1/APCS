@@ -91,29 +91,9 @@ public abstract class Adventurer{
     }
     
     public abstract void attack(Adventurer other);
-	/*
-	Random r = new Random();
-	int n = protect(r.nextInt(getSTR()),other);
-	if(hit(other) || hit(other)){
-	    System.out.println(this + " attacks " + other + " for " + n + " points of damage!!");
-	    other.setHP(other.getHP() - n);
-	}else{
-	    System.out.println(this + " misses " + other + "!");
-	}
-	*/
-    
-
+	
     public abstract void specialAttack(Adventurer other);
-	/*
-	Random r = new Random();
-	int n = protect(r.nextInt(getSTR() + 4),other);
-	if(hit(other)){
-	    System.out.println(this + " fiercely attacks " + other + " for " + n + " points of damage!!");
-	    other.setHP(other.getHP() - n);
-	}else{
-	    System.out.println(this + " misses " + other + "!");
-	}
-	*/
+
     
 
     
