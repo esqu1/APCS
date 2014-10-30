@@ -2,6 +2,7 @@ import java.util.Random;
 import java.util.Scanner;
 public class Game{
     private static int n;
+    private static Adventurer[] players;
     
     public static boolean isInt(String str){
 	if(str.equals("")){
@@ -21,7 +22,7 @@ public class Game{
 	Random r = new Random();
 	Scanner s = new Scanner(System.in);
 
-	System.out.println("Welcome! What will be your adventurer's name?");
+	System.out.println("New player! What will be your adventurer's name?");
 	String name = s.nextLine();
 	System.out.println("Welcome, " + name + "! Choose a class:\nA : Warrior\nB : Wizard\nC : Rogue\nD : Martial Artist");
 	String choice = s.nextLine();
@@ -46,10 +47,18 @@ public class Game{
 	    player = new MartialArtist(name);
 	    System.out.println("You chose Martial Artist!");
 	}
-
+	setupStats(player);
 	return player;
     }
 
+    public static Adventurer[] setupPlayers(){
+	players = new Adventurer[4];
+	System.out.println("Your team will consist of four players.");
+	for(int i = 0; i < 4; i++){
+	    players[i] = setupPlayer();
+	}
+	return players;
+    }
     
     public static Adventurer setupOpp(){
 	Random r = new Random();
@@ -68,7 +77,7 @@ public class Game{
 	return opponent;
     }
 
-    public static void setupStats(Adventurer player, Adventurer opponent){
+    public static void setupStats(Adventurer player){
 	Scanner s = new Scanner(System.in);
 	System.out.println("\nYou will now need to distribute 30 points among your strength, dexterity, and integrity.");
 	System.out.println("Enter how many strength points you want. (max 30) Your strength affects the power of your attacks.");
@@ -111,6 +120,123 @@ public class Game{
 	}
     }
 
+    public static boolean checkHealth(){
+	for(int i = 0; i < 4; i++){
+	    if(players[i].getHP() > 1){
+		return false;
+	    }
+	}
+	return true;
+    }
+
+    public static String getAllStats(){
+	String s = "";
+	for(int i = 0; i < 4; i++){
+	    s += players[i].getStats() + "\n";
+	}
+	return s;
+    }
+    
+    public static void combat(Adventurer[] players, Adventurer opponent){
+	Random r = new Random();
+	Scanner s = new Scanner(System.in);
+	boolean endmatch = true;
+	String loser = "nobody";
+        System.out.println("\n********** GAME BEGINS **********\n");
+	
+
+	if(n == 1){
+	    for(int i = 0; i < 4; i++){
+		
+		System.out.println("********** " + players[i].getName() + "'S TURN **********\n");
+		if(players[i].getHP() < 1){
+		    System.out.println(players[i].getName() + " is down! He cannot make a move!");
+		}else{
+		    System.out.println("Current stats:\n" + getAllStats() + "\n" + opponent.getStats() + "\n");
+		    System.out.println("Choose an action:\nA : attack\nS : special attack\nG : give up");
+		    String act = s.nextLine();	    
+		    
+		    while(! act.equals("A") && ! act.equals("S") && ! act.equals("G")){
+			System.out.println("Invalid response received. Please try again.");
+			act = s.nextLine();
+		    }
+		    if(act.equals("A")){
+			players[i].attack(opponent);
+		    }else if(act.equals("S")){
+			players[i].specialAttack(opponent);
+		    }else if(act.equals("G")){
+			endmatch = false;
+			loser = "players";
+		    }
+		    if(opponent.getHP() < 1){
+			endmatch = false;
+			loser = "opponent";
+		    }
+		}
+		
+	    }
+	}
+	String act2 = "";
+	while(endmatch){
+	    System.out.println("********** OPPONENT'S TURN **********\n");
+	    if(n == 2){
+		System.out.println("Current stats:\n" + getAllStats() + "\n" + opponent.getStats() + "\n");
+	    }
+	    double chance = r.nextDouble();
+	    int target = r.nextInt(4);
+	    if(chance < 0.6){
+		opponent.attack(players[target]);
+	    }else{
+		if(opponent.getSC() > 5){
+		    opponent.specialAttack(players[target]);
+		}else{
+		    opponent.attack(players[target]);
+		} 
+	    }
+	    if(checkHealth()){
+		endmatch = false;
+		loser = "players";
+		break;
+	    }
+
+	    for(int i = 0; i < 4; i++){
+		
+		System.out.println("********** " + players[i].getName() + "'S TURN **********\n");
+		if(players[i].getHP() < 1){
+		    System.out.println(players[i].getName() + " is down! He cannot make a move!");
+		}else{
+		    if(n==1){
+			System.out.println("Current stats:\n" + getAllStats() + "\n" + opponent.getStats() + "\n");
+		    }
+		    System.out.println("Choose an action:\nA : attack\nS : special attack\nG : give up");
+		    act2 = s.nextLine();	    
+		    
+		    while(! act2.equals("A") && ! act2.equals("S") && ! act2.equals("G")){
+			System.out.println("Invalid response received. Please try again.");
+			act2 = s.nextLine();
+		    }
+		    if(act2.equals("A")){
+			players[i].attack(opponent);
+		    }else if(act2.equals("S")){
+			players[i].specialAttack(opponent);
+		    }else if(act2.equals("G")){
+			endmatch = false;
+			loser = "players";
+		    }
+		    if(opponent.getHP() < 1){
+			endmatch = false;
+			loser = "opponent";
+			break;
+		    }
+		}
+	    }
+      	}
+	if(loser.equals("players")){
+	    System.out.println("The good side has lost!\n" + "Malevolence has won!!");
+	}else if(loser.equals("opponent")){
+	    System.out.println("Malevolence has lost!\nThe good side has won!!");
+	}
+    }
 
     public static void combat(Adventurer player, Adventurer opponent){
 	Random r = new Random();
@@ -195,7 +321,7 @@ public class Game{
 	    System.out.println("Malevolence has lost!\n" + player.getName() + " has won!!");
 	}
     }
-	
+    
     
     public static void main(String[] args){
 	
@@ -203,12 +329,11 @@ public class Game{
 	//Adventurer player = new Warrior();// = new Adventurer();
 	//Adventurer opponent = new Warrior();// = new Adventurer();
 	
-	Adventurer player = setupPlayer();
+	Adventurer[] players = setupPlayers();
 	Adventurer opponent = setupOpp();
 	Random r = new Random();
 	Scanner s = new Scanner(System.in);
 	
-	setupStats(player,opponent);
 	System.out.println("Now you shall face against the fierce opponent, " + opponent.getName() + ".");
 	System.out.println("We need to decide who goes first. Allow me to randomly pick with a coin...\n.\n.\n.");
 	
@@ -220,7 +345,7 @@ public class Game{
 	    System.out.println("Opponent goes first!");
 	}
 
-	combat(player,opponent);
+	combat(players,opponent);
 	
 
     }
