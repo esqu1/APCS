@@ -1,5 +1,6 @@
 import java.util.Random;
-public abstract class Adventurer{
+public abstract class Adventurer{ // CONGRATS YOU SYNCED
+
     private String name;
     private int HP, STR, DEX, INT;
 
