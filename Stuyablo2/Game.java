@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
+import java.lang.InterruptedException;
 public class Game{
     private static int n;
     private static Adventurer[] players;
@@ -322,7 +323,11 @@ public class Game{
 	}
     }
     
-    
+    public static void heal(Adventurer[] players){
+	for(int i = 0; i < 4; i++){
+	    players[i].setHP(50);
+	}
+    }
     public static void main(String[] args){
 	
 	// initialize the players
@@ -346,6 +351,21 @@ public class Game{
 	}
 
 	combat(players,opponent);
+	while(true){
+	    System.out.println("Hopefully you didn't break a sweat! Would you like to battle the opponent again? Your players and your opponent will be healed. Enter yes or no.");
+	    String choice = s.nextLine();
+	    if(choice.equalsIgnoreCase("yes")){
+		heal(players);
+		Adventurer newOpponent = setupOpp();
+		combat(players,newOpponent);
+	    }else if(choice.equalsIgnoreCase("no")){
+		System.out.println("Thank you for playing! We hope to see you on another adventure!");
+		break;
+	    }else{
+		System.out.println("Invalid response received. Please try again.");
+	    }
+	}
+	    
 	
 
     }

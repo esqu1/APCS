@@ -4,7 +4,7 @@ public class Warrior extends Adventurer{
 
     public Warrior(){
 	super("Dennis");
-	setHP(60);
+	setHP(50);
 	setRage(50);
 	setSTR(14);
 	setDEX(6);
@@ -13,7 +13,7 @@ public class Warrior extends Adventurer{
     
     public Warrior(String n){
 	super(n);
-	setHP(60);
+	setHP(50);
 	setRage(50);
 	setSTR(14);
 	setDEX(6);
