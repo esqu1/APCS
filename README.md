@@ -1,6 +1,6 @@
 Brandon's APCS Repo
 ====
 
-Hello!
+This is my classwork for APCS. Mostly consists of homework too.
 
 
