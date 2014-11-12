@@ -67,8 +67,7 @@ public class SuperArray{
 
     public Object set(int index, Object o){
 	if(index < 0 || index >= size()){
-	    System.out.println("Invalid index. The index should be between 0 and " + (size() - 1) + " inclusive.");
-	    return null;
+	    throw new IndexOutOfBoundsException();
 	}
 	Object backup = Array[index];
 	Array[index] = o;
@@ -77,16 +76,14 @@ public class SuperArray{
 
     public Object get(int index){
 	if(index < 0 || index >= size()){
-	    System.out.println("Invalid index. The index should be between 0 and " + (size() - 1) + " inclusive.");
-	    return null;
+	    throw new IndexOutOfBoundsException();
 	}
 	return Array[index];
     }
 
     public Object remove(int index){
 	if(index < 0 || index >= size()){
-	    System.out.println("Invalid index. The index should be between 0 and " + (size() - 1) + " inclusive.");
-	    return null;
+	    throw new IndexOutOfBoundsException();
 	}
 	Object[] backup = new Object[size() - 1];
 	for(int i = 0; i < index; i++){

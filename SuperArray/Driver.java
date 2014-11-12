@@ -11,12 +11,21 @@ public class Driver{
 	L.add(new Integer(1001));
 	L.add(new Integer(9000));
 	System.out.println(L);
+	try{
+	    L.set(9000,new String("What do you want"));
+	}catch(IndexOutOfBoundsException e){
+	    System.out.println("What are you doing");
+	}
 	L.set(1,new Integer(78));
 	System.out.println(L);
 	L.set(2,new String("Hello"));
 	System.out.println(L);
 	System.out.println(L.get(2) + " is located at index " + 2);
-	System.out.println(L.get(100));
+	try{
+	    System.out.println(L.get(100));
+	}catch(IndexOutOfBoundsException e){
+	    System.out.println("What are you doing");
+	}
 	L.add(2,new Integer(12345));
 	L.add(10, new Integer(123));
 	System.out.println(L);
