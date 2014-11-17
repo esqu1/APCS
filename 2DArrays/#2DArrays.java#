@@ -1,0 +1,18 @@
+public class Arrays{
+
+    public boolean contains(int value, int[] L){
+	for(int i = 0; i < L.length; i++){
+	    if(L[i] == value){
+		return true;
+	    }
+	}
+    }
+
+    public boolean contains(int value, int[][] L){
+	for(int i = 0; i < L.length; i++){
+	    if(contains(value,L[i])){
+		return true;
+	    }
+	}
+    }
+}
